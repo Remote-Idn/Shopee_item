@@ -8,7 +8,7 @@ import time
 from bs4 import BeautifulSoup
 import csv
 
-url = 'https://www.tokopedia.com/search?st=&q=iphone&srp_component_id=02.01.00.00&srp_page_id=&srp_page_title=&navsource='
+url = 'https://www.tokopedia.com/search?st=&q=iphone%2015%20pro%20ibox&srp_component_id=02.01.00.00&srp_page_id=&srp_page_title=&navsource='
 
 # Initialize the Chrome driver
 options = Options()
@@ -18,6 +18,7 @@ driver = webdriver.Chrome(options=options)
 driver = webdriver.Chrome()
 driver.get(url) 
 time.sleep(25)   
+
 # Scroll down to load more products
 for _ in range(10):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -25,7 +26,7 @@ for _ in range(10):
 
 # Wait for product elements to load
 try:
-    WebDriverWait(driver, 50).until(
+    WebDriverWait(driver, 100).until(
         ec.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.css-jza1fo')))
 except Exception as e:
     print(f"Error waiting for products: {e}")
